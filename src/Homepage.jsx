@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom'
-import './App.css'
+import './Homepage.css'
 
 function Homepage() {
   const navigate = useNavigate()
@@ -7,9 +7,21 @@ function Homepage() {
   return (
     <div className="app">
       <header className="header">
-        <div className="container">
+        <div className="navbar container">
           <h1 className="logo">K B Beveragers</h1>
           <nav className="nav">
+            <button 
+              className="nav-link"
+              onClick={() => document.getElementById('about').scrollIntoView({ behavior: 'smooth' })}
+            >
+              About Us
+            </button>
+            <button 
+              className="nav-link"
+              onClick={() => document.querySelector('.contact').scrollIntoView({ behavior: 'smooth' })}
+            >
+              Contact Us
+            </button>
             <button 
               className="nav-btn"
               onClick={() => navigate('/order')}
@@ -103,7 +115,12 @@ function Homepage() {
                     </div>
                   </div>
 
-                 
+                  <button 
+                    className="learn-more-btn"
+                    onClick={() => navigate('/order')}
+                  >
+                    View Our Products
+                  </button>
                 </div>
                 <div className="about-image">
                   <div className="image-placeholder">
@@ -118,7 +135,7 @@ function Homepage() {
           {/* Products Preview */}
           <section className="products-preview">
             <div className="section-content">
-              <h3 className="section-title">Our Product Range</h3>
+              <h3 className="section-title">Our Top Selling Products </h3>
               <div className="preview-grid">
                 <div className="preview-card">
                   <div className="preview-icon">🍼</div>
@@ -144,7 +161,7 @@ function Homepage() {
                   className="order-now-btn"
                   onClick={() => navigate('/order')}
                 >
-                  Order Now - Free Delivery
+                  Order Now
                 </button>
               </div>
             </div>
@@ -166,20 +183,11 @@ function Homepage() {
                     </div>
                   </div>
                   <div className="contact-item">
-                    <div className="contact-icon">✉️</div>
+                    <div className="contact-icon">📧</div>
                     <div className="contact-details">
                       <h4>Email Us</h4>
                       <p>vckkn1973@gmail.com</p>
                       <small>We reply within 24 hours</small>
-                    </div>
-                  </div>
-                  <div className="contact-item">
-                    <div className="contact-icon">📍</div>
-                    <div className="contact-details">
-                      <h4>Visit Us</h4>
-                      <p>123 Industrial Area, Phase 2</p>
-                      <p>Manufacturing District</p>
-                      <p>City - 110001</p>
                     </div>
                   </div>
                 </div>
@@ -199,50 +207,45 @@ function Homepage() {
             </div>
           </section>
 
+        
           {/* Location Section */}
           <section className="location">
             <div className="section-content">
-              <h3 className="section-title">Our Locations</h3>
-              <div className="location-grid">
-                <div className="location-info">
-                  <div className="location-item">
-                    <div className="location-icon">🏭</div>
-                    <div className="location-details">
-                      <h4>Manufacturing Unit</h4>
-                      <p>456 Production Lane</p>
-                      <p>Industrial Zone, City - 110002</p>
-                      <div className="location-features">
-                        <span>• Production Facility</span>
-                        <span>• Quality Control</span>
-                        <span>• R&D Center</span>
+              <h3 className="section-title">Find Us</h3>
+              <div className="location-address">
+                <div className="address-card">
+                  <div className="address-icon">
+                    <img src="/src/assets/maps.png" alt="Location" className="address-icon-img" />
+                  </div>
+                  <div className="address-details">
+                    <h4>Our Location</h4>
+                    <p className="address-line">K B Beveragers</p>
+                    <p className="address-line">Allur Village</p>
+                    <p className="address-line">Near Community Hall</p>
+                    <p className="address-line">Andhra Pradesh, India</p>
+                    <p className="address-line">PIN: 515775</p>
+                    
+                    <div className="address-info">
+                      <div className="info-item">
+                        <span className="info-icon">🕒</span>
+                        <span>Mon-Fri: 9AM-6PM</span>
+                      </div>
+                      <div className="info-item">
+                        <span className="info-icon">🕒</span>
+                        <span>Saturday: 9AM-2PM</span>
+                      </div>
+                      <div className="info-item">
+                        <span className="info-icon">📞</span>
+                        <span>+91 99800 23403</span>
                       </div>
                     </div>
-                  </div>
-                  <div className="location-item">
-                    <div className="location-icon">🚚</div>
-                    <div className="location-details">
-                      <h4>Distribution Network</h4>
-                      <p>Pan India Coverage</p>
-                      <p>Express Delivery Available</p>
-                      <div className="location-features">
-                        <span>• 24/7 Logistics</span>
-                        <span>• Same Day Delivery*</span>
-                        <span>• Bulk Orders</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="map-placeholder">
-                  <div className="map-content">
-                    <h4>Find Us</h4>
-                    <div className="map-icon">🗺️</div>
-                    <p>Interactive map and directions</p>
-                    <button className="directions-btn">Get Directions</button>
+
                     <button 
-                      className="order-location-btn"
-                      onClick={() => navigate('/order')}
+                      className="gmaps-btn"
+                      onClick={() => window.open('https://maps.google.com/?q=Allur+Village+Andhra+Pradesh+515775', '_blank')}
                     >
-                      Order From Your Location
+                      <span className="gmaps-icon">🗺️</span>
+                      Open in Google Maps
                     </button>
                   </div>
                 </div>
@@ -254,38 +257,10 @@ function Homepage() {
 
       {/* Footer */}
       <footer className="footer">
-        <div className="container">
-          <div className="footer-content">
-            <div className="footer-section">
-              <h4>K B Beveragers</h4>
-              <p>Premium quality pet bottles for all your beverage packaging needs.</p>
-              <div className="social-links">
-                <span>Follow us:</span>
-                <button className="social-btn">📘</button>
-                <button className="social-btn">📷</button>
-                <button className="social-btn">🐦</button>
-              </div>
-            </div>
-            <div className="footer-section">
-              <h4>Quick Links</h4>
-              <ul>
-                <li><button onClick={() => navigate('/order')}>Order Now</button></li>
-                <li><button onClick={() => document.getElementById('about').scrollIntoView({ behavior: 'smooth' })}>About Us</button></li>
-                <li><button>Quality Standards</button></li>
-                <li><button>Bulk Orders</button></li>
-              </ul>
-            </div>
-            <div className="footer-section">
-              <h4>Contact Info</h4>
-              <p>📞 +91 99800 23403</p>
-              <p>✉️ vckkn1973@gmail.com</p>
-              <p>📍 Allur village near some hall</p>
-            </div>
-          </div>
+        
           <div className="footer-bottom">
             <p>&copy; 2025 K B Beveragers. All rights reserved.</p>
           </div>
-        </div>
       </footer>
     </div>
   )
