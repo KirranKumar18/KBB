@@ -1,8 +1,9 @@
 import { useNavigate } from 'react-router-dom'
 import './Homepage.css'
-
+//465151651651565551
 function Homepage() {
   const navigate = useNavigate()
+  
 
   return (
     <div className="app">
@@ -242,7 +243,7 @@ function Homepage() {
 
                     <button 
                       className="gmaps-btn"
-                      onClick={() => window.open('https://maps.google.com/?q=Allur+Village+Andhra+Pradesh+515775', '_blank')}
+                      onClick={() => window.open('https://maps.app.goo.gl/NCL3vUxMEw6hDi83A', '_blank')}
                     >
                       <span className="gmaps-icon">🗺️</span>
                       Open in Google Maps

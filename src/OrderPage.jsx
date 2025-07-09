@@ -1,11 +1,13 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import supabase from './database/supabase'
 import './App.css'
 
 function OrderPage() {
   const navigate = useNavigate()
   const [cartItems, setCartItems] = useState([])
   const [showCart, setShowCart] = useState(false)
+  const [isProcessing, setIsProcessing] = useState(false)
 
   // Product data
   const products = [
@@ -69,6 +71,60 @@ function OrderPage() {
 
   const getTotalItems = () => {
     return cartItems.reduce((total, item) => total + item.quantity, 0)
+  }
+
+  const handleCheckout = async () => {
+    if (cartItems.length === 0) {
+      alert('Your cart is empty!')
+      return
+    }
+
+    setIsProcessing(true)
+
+    try {
+      // Create order JSON structure
+      const orderData = {
+        items: cartItems.map(item => ({
+          bottle_type: item.name,
+          size: item.size,
+          quantity: item.quantity,
+          unit_price: item.price,
+          total_price: item.price * item.quantity
+        })),
+        total_cost: getTotalPrice(),
+        order_date: new Date().toLocaleString(),
+        item_count: getTotalItems()
+      }
+
+      // Insert into Supabase
+      const { data, error } = await supabase
+        .from('orders')
+        .insert([
+          {
+            "Customer name": 'abc',
+            Order: orderData,
+            Ordered_At: new Date().toLocaleString(),
+            Total: getTotalPrice()
+          }
+        ])
+
+      if (error) {
+        console.error('Error inserting order:', error)
+        alert('Failed to process order. Please try again.')
+      } else {
+        console.log('Order inserted successfully:', data)
+        alert('Order placed successfully!')
+        
+        // Clear cart and close modal
+        setCartItems([])
+        setShowCart(false)
+      }
+    } catch (error) {
+      console.error('Error processing checkout:', error)
+      alert('An error occurred while processing your order.')
+    } finally {
+      setIsProcessing(false)
+    }
   }
 
   return (
@@ -158,6 +214,8 @@ function OrderPage() {
           onRemove={removeFromCart}
           onUpdateQuantity={updateQuantity}
           totalPrice={getTotalPrice()}
+          onCheckout={handleCheckout}
+          isProcessing={isProcessing}
         />
       )}
     </div>
@@ -216,7 +274,7 @@ function ProductCard({ product, onAddToCart }) {
   )
 }
 
-function Cart({ items, onClose, onRemove, onUpdateQuantity, totalPrice }) {
+function Cart({ items, onClose, onRemove, onUpdateQuantity, totalPrice, onCheckout, isProcessing }) {
   return (
     <div className="cart-overlay">
       <div className="cart">
@@ -276,8 +334,12 @@ function Cart({ items, onClose, onRemove, onUpdateQuantity, totalPrice }) {
                 <div className="cart-total">
                   <strong>Total: ₹{totalPrice}</strong>
                 </div>
-                <button className="checkout-btn">
-                  Proceed to Checkout
+                <button 
+                  className="checkout-btn"
+                  onClick={onCheckout}
+                  disabled={isProcessing}
+                >
+                  {isProcessing ? 'Processing...' : 'Proceed to Checkout'}
                 </button>
               </div>
             </>
