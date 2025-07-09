@@ -133,17 +133,12 @@ function OrderPage() {
         <div className="container">
           <h1 className="logo" onClick={() => navigate('/')}>K B Beveragers</h1>
           <nav className="nav">
-            <button 
-              className="nav-btn home-btn"
-              onClick={() => navigate('/')}
-            >
-              ← Home
-            </button>
+           
             <button 
               className="cart-button"
               onClick={() => setShowCart(!showCart)}
             >
-              🛒 My Cart {getTotalItems() > 0 && <span className="cart-count">({getTotalItems()})</span>}
+              🛒 My Cart 
             </button>
           </nav>
         </div>
@@ -151,15 +146,7 @@ function OrderPage() {
 
       <main className="main">
         <div className="container">
-          {/* Order Header */}
-          <section className="order-header">
-            <div className="order-breadcrumb">
-              <span onClick={() => navigate('/')}>Home</span> / <span>Order</span>
-            </div>
-            <h2 className="order-title">Order Premium Pet Bottles</h2>
-            <p className="order-subtitle">Choose from our range of high-quality, BPA-free bottles</p>
-          </section>
-
+          
           {/* Products Section */}
           <section className="products">
             <div className="section-content">
@@ -182,9 +169,9 @@ function OrderPage() {
               <h3 className="section-title">Why Order From Us?</h3>
               <div className="benefits-grid">
                 <div className="benefit-item">
-                  <div className="benefit-icon">🚚</div>
-                  <h4>Free Delivery</h4>
-                  <p>Free delivery on orders above ₹500</p>
+                  <div className="benefit-icon">💼</div>
+                  <h4>Industry Experience </h4>
+                  <p>Over 15 years of expertise in the field </p>
                 </div>
                 <div className="benefit-item">
                   <div className="benefit-icon">⚡</div>
