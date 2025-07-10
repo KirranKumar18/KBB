@@ -113,6 +113,40 @@ function OrderPage() {
         alert('Failed to process order. Please try again.')
       } else {
         console.log('Order inserted successfully:', data)
+        
+        // Send direct notification via ntfy
+        try {
+          const ntfyTopic = 'new-orders'
+          const ntfyUrl = `https://ntfy.sh/${ntfyTopic}`
+          
+          // Create message content
+          const title = `New Order Received`
+          let message = `Customer: abc\nTotal: ₹${getTotalPrice()}\nItems: ${getTotalItems()}\n\nOrder Items:\n`
+          
+          // Add each item to the message
+          cartItems.forEach(item => {
+            message += `- ${item.name}: ${item.quantity} x ₹${item.price} = ₹${item.price * item.quantity}\n`
+          })
+          
+          // Send notification directly from frontend with a special header to prevent duplicates
+          fetch(ntfyUrl, {
+            method: 'POST',
+            headers: {
+              'Title': title,
+              'Priority': 'high',
+              'Tags': 'shopping_cart,money',
+              'Content-Type': 'text/plain',
+              'X-Frontend-Notification': 'true', // Flag to identify this notification
+              'X-Order-ID': JSON.stringify(data[0]?.id || 'unknown') // Include order ID for tracking
+            },
+            body: message
+          }).then(() => console.log('✅ Notification sent!'))
+            .catch(err => console.error('❌ Error sending notification:', err))
+        } catch (notifyError) {
+          console.error('Failed to send notification:', notifyError)
+          // Continue with checkout process even if notification fails
+        }
+        
         alert('Order placed successfully!')
         
         // Clear cart and close modal
