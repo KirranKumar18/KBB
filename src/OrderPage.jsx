@@ -245,10 +245,19 @@ function OrderPage() {
 
 function ProductCard({ product, onAddToCart }) {
   const [quantity, setQuantity] = useState(1)
+  const [showAddedMessage, setShowAddedMessage] = useState(false)
 
   const handleAddToCart = () => {
     onAddToCart(product, quantity)
     setQuantity(1) // Reset quantity after adding
+    
+    // Show the "Added to cart" message
+    setShowAddedMessage(true)
+    
+    // Hide the message after 2 seconds
+    setTimeout(() => {
+      setShowAddedMessage(false)
+    }, 2000)
   }
 
   return (
@@ -287,8 +296,12 @@ function ProductCard({ product, onAddToCart }) {
           </div>
         </div>
         
-        <button className="add-to-cart-btn" onClick={handleAddToCart}>
-          Add to Cart
+        <button 
+          className={`add-to-cart-btn ${showAddedMessage ? 'added' : ''}`} 
+          onClick={handleAddToCart}
+          disabled={showAddedMessage}
+        >
+          {showAddedMessage ? '✓ Added to Cart' : 'Add to Cart'}
         </button>
       </div>
     </div>

@@ -2,6 +2,7 @@
 // This script listens for new orders in Supabase and sends notifications via ntfy
 import { createClient } from '@supabase/supabase-js'
 import fetch from 'node-fetch'
+// import { supabase } from './src/database/supabase.js'
 
 // Supabase configuration (using the same config from your app)
 const supabaseUrl = 'https://cypdviizsrdrirfqujss.supabase.co'

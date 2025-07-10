@@ -1219,11 +1219,36 @@ body {
   transition: all 0.3s ease;
   width: 100%;
   box-shadow: 0 4px 15px rgba(0, 184, 148, 0.4);
+  position: relative;
+  overflow: hidden;
 }
 
 .add-to-cart-btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(0, 184, 148, 0.6);
+}
+
+.add-to-cart-btn.added {
+  background: linear-gradient(135deg, #6c5ce7 0%, #4834d4 100%);
+  box-shadow: 0 4px 15px rgba(108, 92, 231, 0.4);
+  animation: addedPulse 0.6s ease-in-out;
+}
+
+@keyframes addedPulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.add-to-cart-btn.added:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(108, 92, 231, 0.6);
 }
 
 /* Cart overlay */
