@@ -24,6 +24,12 @@ function Homepage() {
               Contact Us
             </button>
             <button 
+              className="nav-link"
+              onClick={() => navigate('/auth')}
+            >
+              Login
+            </button>
+            <button 
               className="nav-btn"
               onClick={() => navigate('/order')}
             >
@@ -67,6 +73,7 @@ function Homepage() {
           {/* Stats Section */}
           <section className="stats">
             <div className="section-content">
+              <h3 className="section-title">Our Journey So Far</h3>
               <div className="stats-grid">
                 <div className="stat-item">
                   <div className="stat-number">10K+</div>
