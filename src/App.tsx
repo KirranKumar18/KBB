@@ -6,7 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import Authentication from "./Authentication";
-import Orderpage from "./OrderPage";
+import OrderPage from "./order";
 
 const queryClient = new QueryClient();
 
@@ -18,10 +18,9 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
-          <Route path="/order" element={<Orderpage />} />
-          <Route path="*" element={<NotFound />} />
+          <Route path="/order" element={<OrderPage />} />
           <Route path="/auth" element={<Authentication />} />
-        \
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
     </TooltipProvider>

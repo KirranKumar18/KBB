@@ -697,8 +697,8 @@ const Homepage = () => {
               <ul className="space-y-2 text-background/80">
                 <li>+91 99800 23403</li>
                 <li>vckkn1973@gmail.com</li>
-                <li>123 Pure Water Street</li>
-                <li>Hydration City, HC 12345</li>
+                <li>SLN Minerals</li>
+                <li>Allur village, Near Achariya clg</li>
               </ul>
             </div>
           </div>
